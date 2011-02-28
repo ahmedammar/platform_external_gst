@@ -105,6 +105,7 @@ GST_CFLAGS := \
 	$(shell $(PKG_CONFIG) gstreamer --cflags)
 
 CONFIGURE := autogen.sh
+CONFIGURE_TARGETS :=
 
 #only in this order for reference... this is optimal build order
 include $(GSTREAMER_AGGREGATE_TOP)/glib/Android.mk
@@ -113,8 +114,9 @@ include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-base/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-good/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gnonlin/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-editing-services/Android.mk
-include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-android2/Android.mk
-include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
+#include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-android2/Android.mk
+#include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
 
 TARGETS:
 	@echo $(CONFIGURE_TARGETS)
