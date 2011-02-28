@@ -116,7 +116,7 @@ include $(GSTREAMER_AGGREGATE_TOP)/gnonlin/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-editing-services/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
 #include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-android2/Android.mk
-#include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
 
 TARGETS:
 	@echo $(CONFIGURE_TARGETS)
