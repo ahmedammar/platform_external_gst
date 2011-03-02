@@ -88,7 +88,9 @@ CONFIGURE_CPP := $(PWD)/$(TARGET_TOOLS_PREFIX)cpp
 CONFIGURE_INCLUDES += \
 		$(foreach incdir, $(realpath $(C_INCLUDES) $(TARGET_C_INCLUDES)), \
 				-I$(incdir)) \
-		-I$(PWD)/external/zlib	
+		-I$(TOP)/external/zlib \
+		-I$(GSTREAMER_AGGREGATE_TOP)/libid3tag \
+		-I$(GSTREAMER_AGGREGATE_TOP)/libmad
 endif
 
 CONFIGURE_CPPFLAGS := \
@@ -118,6 +120,9 @@ include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-android2/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
 
 TARGETS:
 	@echo $(CONFIGURE_TARGETS)
