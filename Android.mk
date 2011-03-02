@@ -107,6 +107,8 @@ GST_CFLAGS := \
 	$(shell $(PKG_CONFIG) gstreamer --cflags)
 
 CONFIGURE := autogen.sh
+
+.SECONDARYEXPANSION:
 CONFIGURE_TARGETS :=
 
 #only in this order for reference... this is optimal build order
