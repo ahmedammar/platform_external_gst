@@ -88,7 +88,7 @@ CONFIGURE_CPP := $(PWD)/$(TARGET_TOOLS_PREFIX)cpp
 CONFIGURE_INCLUDES += \
 		$(foreach incdir, $(realpath $(C_INCLUDES) $(TARGET_C_INCLUDES)), \
 				-I$(incdir)) \
-		-I$(TOP)/external/zlib \
+		-I$(abspath $(TOP)/external/zlib) \
 		-I$(GSTREAMER_AGGREGATE_TOP)/libid3tag \
 		-I$(GSTREAMER_AGGREGATE_TOP)/libmad
 endif
@@ -133,4 +133,4 @@ TARGETS:
 #include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 
 .PHONY: configure
-configure: $$(CONFIGURE_TARGETS)
+configure: $(CONFIGURE_TARGETS)
