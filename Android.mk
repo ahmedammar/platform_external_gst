@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
-GSTREAMER_AGGREGATE_TOP := $(LOCAL_PATH)
+GSTREAMER_AGGREGATE_TOP := $(abspath $(LOCAL_PATH))
 
 ifneq ($(SYSROOT),)
 NDK_BUILD := true
@@ -132,5 +132,5 @@ TARGETS:
 #has a funny gstreamer_TOP of its own, fix that
 #include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 
-.PHONY: configure
-configure: $(CONFIGURE_TARGETS)
+.PHONY: gstreamer-aggregate-configure
+gstreamer-aggregate-configure: $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(TARGET_OUT_SHARED_LIBRARIES)/libc.so $(TARGET_OUT_SHARED_LIBRARIES)/libz.so $(CONFIGURE_TARGETS)
