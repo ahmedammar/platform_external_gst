@@ -60,11 +60,14 @@ CONFIGURE_CFLAGS := \
     $(call host-path,\
         $(TARGET_CRTEND_O)) \
 	$(CONFIGURE_INCLUDES)
-CONFIGURE_LDFLAGS += -L$(SYSROOT)/usr/lib
-CONFIGURE_INCLUDES += -I$(SYSROOT)/usr/include
+CONFIGURE_LDFLAGS += -L$(SYSROOT)/usr/lib -L$(TARGET_OUT)
+CONFIGURE_INCLUDES += -I$(SYSROOT)/usr/include \
+		-I$(GSTREAMER_AGGREGATE_TOP)/libid3tag \
+		-I$(GSTREAMER_AGGREGATE_TOP)/libmad
 CONFIGURE_CPP := $(TOOLCHAIN_PREFIX)cpp
-
+LIB := $(SYSROOT)/usr/lib
 else
+LIB := $(TARGET_OUT_SHARED_LIBRARIES)
 
 CONFIGURE_CC := $(patsubst %,$(PWD)/%,$(TARGET_CC))
 CONFIGURE_LDFLAGS += -L$(PWD)/$(TARGET_OUT_INTERMEDIATE_LIBRARIES)
@@ -120,8 +123,10 @@ include $(GSTREAMER_AGGREGATE_TOP)/gnonlin/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-editing-services/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
+ifeq ($(NDK_BUILD),false)
 include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-android2/Android.mk
+endif
 include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
@@ -133,4 +138,4 @@ TARGETS:
 #include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 
 .PHONY: gstreamer-aggregate-configure
-gstreamer-aggregate-configure: $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(TARGET_OUT_SHARED_LIBRARIES)/libc.so $(TARGET_OUT_SHARED_LIBRARIES)/libz.so $(CONFIGURE_TARGETS)
+gstreamer-aggregate-configure: $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(LIB)/libc.so $(LIB)/libz.so $(CONFIGURE_TARGETS)
