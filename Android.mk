@@ -115,6 +115,9 @@ CONFIGURE := autogen.sh
 CONFIGURE_TARGETS :=
 
 #only in this order for reference... this is optimal build order
+include $(GSTREAMER_AGGREGATE_TOP)/ogg/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/glib/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gstreamer/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-base/Android.mk
@@ -127,8 +130,6 @@ ifeq ($(NDK_BUILD),false)
 include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-android2/Android.mk
 endif
-include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
-include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
 
 TARGETS:
