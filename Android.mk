@@ -99,7 +99,7 @@ endif
 CONFIGURE_CPPFLAGS := \
 	$(CONFIGURE_INCLUDES)
 
-CONFIGURE_PKG_CONFIG_LIBDIR := $(GLIB_TOP):$(gstreamer_TOP)/pkgconfig:$(GST_PLUGINS_BASE_TOP)/pkgconfig:$(GST_PLUGINS_GOOD_TOP)/pkgconfig:$(GST_PLUGINS_BAD_TOP)/pkgconfig
+CONFIGURE_PKG_CONFIG_LIBDIR := $(GLIB_TOP):$(gstreamer_TOP)/pkgconfig:$(GST_PLUGINS_BASE_TOP)/pkgconfig:$(GST_PLUGINS_GOOD_TOP)/pkgconfig:$(GST_PLUGINS_BAD_TOP)/pkgconfig:$(GSTREAMER_AGGREGATE_TOP)/x264
 
 PKG_CONFIG := PKG_CONFIG_LIBDIR=$(CONFIGURE_PKG_CONFIG_LIBDIR) PKG_CONFIG_TOP_BUILD_DIR="/" pkg-config
 GST_CFLAGS := \
@@ -115,6 +115,7 @@ CONFIGURE := autogen.sh
 CONFIGURE_TARGETS :=
 
 #only in this order for reference... this is optimal build order
+include $(GSTREAMER_AGGREGATE_TOP)/x264/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/ogg/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
