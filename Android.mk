@@ -63,7 +63,8 @@ CONFIGURE_CFLAGS := \
 CONFIGURE_LDFLAGS += -L$(SYSROOT)/usr/lib -L$(TARGET_OUT)
 CONFIGURE_INCLUDES += -I$(SYSROOT)/usr/include \
 		-I$(GSTREAMER_AGGREGATE_TOP)/libid3tag \
-		-I$(GSTREAMER_AGGREGATE_TOP)/libmad
+		-I$(GSTREAMER_AGGREGATE_TOP)/libmad \
+		-I$(GSTREAMER_AGGREGATE_TOP)/faad/include \
 CONFIGURE_CPP := $(TOOLCHAIN_PREFIX)cpp
 LIB := $(SYSROOT)/usr/lib
 else
@@ -93,7 +94,8 @@ CONFIGURE_INCLUDES += \
 				-I$(incdir)) \
 		-I$(abspath $(TOP)/external/zlib) \
 		-I$(GSTREAMER_AGGREGATE_TOP)/libid3tag \
-		-I$(GSTREAMER_AGGREGATE_TOP)/libmad
+		-I$(GSTREAMER_AGGREGATE_TOP)/libmad \
+		-I$(GSTREAMER_AGGREGATE_TOP)/faad/include
 endif
 
 CONFIGURE_CPPFLAGS := \
@@ -116,6 +118,7 @@ CONFIGURE_TARGETS :=
 
 #only in this order for reference... this is optimal build order
 include $(GSTREAMER_AGGREGATE_TOP)/x264/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/faad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/ogg/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
