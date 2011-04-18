@@ -132,6 +132,7 @@ include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
 ifeq ($(NDK_BUILD),false)
 include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-android2/Android.mk
 endif
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
 
