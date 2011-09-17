@@ -29,6 +29,11 @@ ifeq ($(GST_PLUGINS_BAD_TOP),)
 GST_PLUGINS_BAD_TOP := $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad
 endif
 
+ifeq ($(GST_PLUGINS_FSL_TOP),)
+GST_PLUGINS_FSL_TOP := $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-fsl
+endif
+
+
 ifeq ($(GNONLIN_TOP),)
 GNONLIN_TOP := $(GSTREAMER_AGGREGATE_TOP)/gnonlin
 endif
@@ -128,11 +133,13 @@ include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-base/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-good/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gnonlin/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-editing-services/Android.mk
-include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-fsl/Android.mk
+#include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
-ifeq ($(NDK_BUILD),false)
+#include $(GSTREAMER_AGGREGATE_TOP)/libsoup/Android.mk
+#ifeq ($(NDK_BUILD),false)
 include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
-endif
+#endif
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
 
 TARGETS:
