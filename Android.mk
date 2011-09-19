@@ -13,6 +13,10 @@ ifeq ($(GLIB_TOP),)
 GLIB_TOP := $(GSTREAMER_AGGREGATE_TOP)/glib
 endif
 
+ifeq ($(LIBSOUP_TOP),)
+LIBSOUP_TOP := $(GSTREAMER_AGGREGATE_TOP)/libsoup
+endif
+
 ifeq ($(gstreamer_TOP),)
 gstreamer_TOP := $(GSTREAMER_AGGREGATE_TOP)/gstreamer
 endif
@@ -32,7 +36,6 @@ endif
 ifeq ($(GST_PLUGINS_FSL_TOP),)
 GST_PLUGINS_FSL_TOP := $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-fsl
 endif
-
 
 ifeq ($(GNONLIN_TOP),)
 GNONLIN_TOP := $(GSTREAMER_AGGREGATE_TOP)/gnonlin
@@ -95,18 +98,29 @@ CONFIGURE_LDFLAGS += \
 CONFIGURE_CPP := $(PWD)/$(TARGET_TOOLS_PREFIX)cpp
 
 CONFIGURE_INCLUDES += \
+		-I$(GLIB_TOP) \
 		$(foreach incdir, $(realpath $(C_INCLUDES) $(TARGET_C_INCLUDES)), \
 				-I$(incdir)) \
 		-I$(abspath $(TOP)/external/zlib) \
+		-I$(abspath $(TOP)/external/libxml2) \
 		-I$(GSTREAMER_AGGREGATE_TOP)/libid3tag \
 		-I$(GSTREAMER_AGGREGATE_TOP)/libmad \
-		-I$(GSTREAMER_AGGREGATE_TOP)/faad/include
+		-I$(GSTREAMER_AGGREGATE_TOP)/faad/include \
+		-I$(GSTREAMER_AGGREGATE_TOP)/libsoup \
+		-I$(GLIB_TOP)/gio \
+		-I$(GLIB_TOP)/gio/inotify \
+		-I$(GLIB_TOP)/gio/libasyncns \
+		-I$(GLIB_TOP)/gio/xdgmime \
+		-I$(GLIB_TOP)/glib \
+		-I$(GLIB_TOP)/gmodule \
+		-I$(GLIB_TOP)/gobject \
+		-I$(GLIB_TOP)/gthread
 endif
 
 CONFIGURE_CPPFLAGS := \
 	$(CONFIGURE_INCLUDES)
 
-CONFIGURE_PKG_CONFIG_LIBDIR := $(GLIB_TOP):$(gstreamer_TOP)/pkgconfig:$(GST_PLUGINS_BASE_TOP)/pkgconfig:$(GST_PLUGINS_GOOD_TOP)/pkgconfig:$(GST_PLUGINS_BAD_TOP)/pkgconfig:$(GSTREAMER_AGGREGATE_TOP)/x264
+CONFIGURE_PKG_CONFIG_LIBDIR := $(GLIB_TOP):$(gstreamer_TOP)/pkgconfig:$(GST_PLUGINS_BASE_TOP)/pkgconfig:$(GST_PLUGINS_GOOD_TOP)/pkgconfig:$(GST_PLUGINS_BAD_TOP)/pkgconfig:$(GSTREAMER_AGGREGATE_TOP)/x264:$(LIBSOUP_TOP)
 
 PKG_CONFIG := PKG_CONFIG_LIBDIR=$(CONFIGURE_PKG_CONFIG_LIBDIR) PKG_CONFIG_TOP_BUILD_DIR="/" pkg-config
 GST_CFLAGS := \
@@ -128,6 +142,7 @@ include $(GSTREAMER_AGGREGATE_TOP)/ogg/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/glib/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/libsoup/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gstreamer/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-base/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-good/Android.mk
@@ -136,10 +151,7 @@ include $(GSTREAMER_AGGREGATE_TOP)/gst-editing-services/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-fsl/Android.mk
 #include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
-#include $(GSTREAMER_AGGREGATE_TOP)/libsoup/Android.mk
-#ifeq ($(NDK_BUILD),false)
 include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
-#endif
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
 
 TARGETS:
