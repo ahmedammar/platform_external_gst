@@ -17,6 +17,10 @@ ifeq ($(LIBSOUP_TOP),)
 LIBSOUP_TOP := $(GSTREAMER_AGGREGATE_TOP)/libsoup
 endif
 
+ifeq ($(ORC_TOP),)
+ORC_TOP := $(GSTREAMER_AGGREGATE_TOP)/liborc
+endif
+
 ifeq ($(gstreamer_TOP),)
 gstreamer_TOP := $(GSTREAMER_AGGREGATE_TOP)/gstreamer
 endif
@@ -120,7 +124,7 @@ endif
 CONFIGURE_CPPFLAGS := \
 	$(CONFIGURE_INCLUDES)
 
-CONFIGURE_PKG_CONFIG_LIBDIR := $(GLIB_TOP):$(gstreamer_TOP)/pkgconfig:$(GST_PLUGINS_BASE_TOP)/pkgconfig:$(GST_PLUGINS_GOOD_TOP)/pkgconfig:$(GST_PLUGINS_BAD_TOP)/pkgconfig:$(GSTREAMER_AGGREGATE_TOP)/x264:$(LIBSOUP_TOP)
+CONFIGURE_PKG_CONFIG_LIBDIR := $(GLIB_TOP):$(gstreamer_TOP)/pkgconfig:$(GST_PLUGINS_BASE_TOP)/pkgconfig:$(GST_PLUGINS_GOOD_TOP)/pkgconfig:$(GST_PLUGINS_BAD_TOP)/pkgconfig:$(GSTREAMER_AGGREGATE_TOP)/x264:$(LIBSOUP_TOP):$(ORC_TOP)
 
 PKG_CONFIG := PKG_CONFIG_LIBDIR=$(CONFIGURE_PKG_CONFIG_LIBDIR) PKG_CONFIG_TOP_BUILD_DIR="/" pkg-config
 GST_CFLAGS := \
@@ -136,6 +140,7 @@ CONFIGURE := autogen.sh
 CONFIGURE_TARGETS :=
 
 #only in this order for reference... this is optimal build order
+include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/x264/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/faad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/ogg/Android.mk
@@ -143,6 +148,7 @@ include $(GSTREAMER_AGGREGATE_TOP)/libmad/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libid3tag/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/glib/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/libsoup/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/liborc/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gstreamer/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-base/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-good/Android.mk
@@ -151,8 +157,9 @@ include $(GSTREAMER_AGGREGATE_TOP)/gst-editing-services/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-fsl/Android.mk
 #include $(GSTREAMER_AGGREGATE_TOP)/gst-openmax/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
-include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
+#include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
+include $(GSTREAMER_AGGREGATE_TOP)/gst-tracelib/Android.mk
 
 TARGETS:
 	@echo $(CONFIGURE_TARGETS)
