@@ -159,7 +159,7 @@ include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-fsl/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-bad/Android.mk
 #include $(GSTREAMER_AGGREGATE_TOP)/gst-android/Android.mk
 include $(GSTREAMER_AGGREGATE_TOP)/gst-plugins-ugly/Android.mk
-include $(GSTREAMER_AGGREGATE_TOP)/gst-tracelib/Android.mk
+#include $(GSTREAMER_AGGREGATE_TOP)/gst-tracelib/Android.mk
 
 TARGETS:
 	@echo $(CONFIGURE_TARGETS)
